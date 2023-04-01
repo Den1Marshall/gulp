@@ -9,7 +9,7 @@ const clean = require('gulp-clean');
 const fileinclude = require('gulp-file-include');
 const webphtml = require('gulp-webp-html-nosvg');
 const autoprefixer = require('gulp-autoprefixer');
-const cleanCSS = require('gulp-clean-css');
+const cleanCSS = require('clean-css');
 const webpcss = require('gulp-webpcss');
 const newer = require('gulp-newer');
 const webpack = require('webpack-stream');
@@ -39,8 +39,7 @@ gulp.task('sass', function () {
         cascade: false,
       })
     )
-    .pipe(cleanCSS({ compatibility: 'ie8' }))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('./maps'))
     .pipe(
       rename({
         suffix: '.min',
