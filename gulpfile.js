@@ -38,7 +38,7 @@ gulp.task('sass', function () {
         cascade: false,
       })
     )
-    .pipe(sourcemaps.write('./maps'))
+    .pipe(sourcemaps.write('.'))
     .pipe(
       rename({
         suffix: '.min',
@@ -211,6 +211,7 @@ gulp.task(
   gulp.series(
     'clean',
     'minify-html',
+    'sass',
     'js',
     'img',
     'imgwebp',
