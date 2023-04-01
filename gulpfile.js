@@ -49,32 +49,6 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('sass-no-sourcemaps', function () {
-  return gulp
-    .src('src/sass/**/*.scss')
-    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
-    .pipe(
-      webpcss({
-        webpClass: '.webp',
-        noWebpClass: '.no-webp',
-      })
-    )
-    .pipe(
-      autoprefixer({
-        grid: true,
-        overrideBrowserslist: ['last 3 versions'],
-        cascade: false,
-      })
-    )
-    .pipe(cleanCSS({ compatibility: 'ie8' }))
-    .pipe(
-      rename({
-        suffix: '.min',
-      })
-    )
-    .pipe(gulp.dest('dist/css'));
-});
-
 gulp.task('html', function () {
   return gulp
     .src('src/*.html')
@@ -201,10 +175,7 @@ gulp.task('watch', function () {
   // watching html
   gulp.watch('src/**/*.html', gulp.parallel('html'));
   // CONCAT? .scss files & minifying them & moving to dist/js
-  gulp.watch(
-    'src/sass/**/*.(scss|sass|css)',
-    gulp.parallel('sass', 'sasstocss')
-  );
+  gulp.watch('src/sass/**/*.(scss|sass|css)', gulp.parallel('sass'));
   // CONCAT? .js files & minifying them & moving to dist/js
   gulp.watch('src/js/**/*.js', gulp.parallel('js'));
   // watching usual images & converting to minified jpg and webp & moving them to dist/img
@@ -242,7 +213,6 @@ gulp.task(
   gulp.series(
     'clean',
     'minify-html',
-    'sass-no-sourcemaps',
     'js',
     'img',
     'imgwebp',
