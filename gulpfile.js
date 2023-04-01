@@ -75,26 +75,6 @@ gulp.task('sass-no-sourcemaps', function () {
     .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('sasstocss', function () {
-  return gulp
-    .src('src/sass/**/*.scss')
-    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
-    .pipe(
-      webpcss({
-        webpClass: '.webp',
-        noWebpClass: '.no-webp',
-      })
-    )
-    .pipe(
-      autoprefixer({
-        grid: true,
-        overrideBrowserslist: ['last 3 versions'],
-        cascade: true,
-      })
-    )
-    .pipe(gulp.dest('dist/css'));
-});
-
 gulp.task('html', function () {
   return gulp
     .src('src/*.html')
@@ -242,7 +222,6 @@ gulp.task(
   gulp.series(
     'html',
     'sass',
-    'sasstocss',
     'js',
     'img',
     'imgwebp',
@@ -264,7 +243,6 @@ gulp.task(
     'clean',
     'minify-html',
     'sass-no-sourcemaps',
-    'sasstocss',
     'js',
     'img',
     'imgwebp',
