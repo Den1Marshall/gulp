@@ -1,3 +1,3 @@
-import { isWebp } from "./modules/base/isWebp";
+import { isWebp } from './modules/isWebp';
 
-isWebp()
+isWebp();
