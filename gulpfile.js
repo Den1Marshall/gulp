@@ -81,7 +81,7 @@ gulp.task('js', function () {
       webpack({
         mode: 'production',
         output: {
-          filename: 'app.[hash].min.js',
+          filename: 'app.min.js',
         },
       })
     )
